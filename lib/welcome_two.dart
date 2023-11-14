@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:ambulify_app/login.dart';
-import 'package:ambulify_app/welcome_two.dart';
+import 'package:ambulify_app/login.dart';
 
-class Welcome extends StatelessWidget {
-  const Welcome({Key? key});
+class WelcomeTwo extends StatelessWidget {
+  const WelcomeTwo({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,27 +34,27 @@ class Welcome extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Lottie.asset(
-                                'assets/animations/pin.json',
-                                width: 150,
-                                height: 150,
+                                'assets/animations/user2.json',
+                                width: 180,
+                                height: 180,
                                 reverse: true,
                                 repeat: true,
                                 fit: BoxFit.cover,
                               ),
-                              SizedBox(height: 20), // Spacing between animation and text
+                              SizedBox(height: 20),
                               const Text(
-                                'Are You In Karachi?',
+                                'Are You?',
                                 style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.red,
                                 ),
                               ),
-                              SizedBox(height: 20), // Spacing between text and buttons
+                              SizedBox(height: 20),
                               ElevatedButton(
                                 onPressed: () {
-                                  // Navigate to the login page when 'Yes' is pressed
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const WelcomeTwo ()));
+                                  // Navigate to the login page when 'Patient' is pressed
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Login_Page()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.red,
@@ -64,12 +63,13 @@ class Welcome extends StatelessWidget {
                                   ),
                                   minimumSize: const Size(250, 50),
                                 ),
-                                child: const Text('Yes', style: TextStyle(color: Colors.white)),
+                                child: const Text('Patient', style: TextStyle(color: Colors.white)),
                               ),
                               SizedBox(height: 12),
                               ElevatedButton(
                                 onPressed: () {
-                                  // Add your code for the 'No' button action
+                                  // Navigate to the driver page when 'Ambulance Driver' is pressed
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => DriverPage()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.red,
@@ -78,8 +78,9 @@ class Welcome extends StatelessWidget {
                                   ),
                                   minimumSize: const Size(250, 50),
                                 ),
-                                child: const Text('No', style: TextStyle(color: Colors.white)),
+                                child: const Text('Ambulance Driver', style: TextStyle(color: Colors.white)),
                               ),
+                              SizedBox(height: 25,),
                             ],
                           ),
                         ),
@@ -96,8 +97,56 @@ class Welcome extends StatelessWidget {
   }
 }
 
+class PatientPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Patient Page'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Welcome to the Patient Page!'),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to the login page when 'Login' is pressed
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Login_Page()));
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                minimumSize: const Size(250, 50),
+              ),
+              child: const Text('Login', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DriverPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Ambulance Driver Page'),
+      ),
+      body: Center(
+        child: Text('Welcome to the Ambulance Driver Page!'),
+      ),
+    );
+  }
+}
+
 void main() {
   runApp(const MaterialApp(
-    home: Welcome(),
+    home: WelcomeTwo(),
   ));
 }
