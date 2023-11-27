@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ambulify_app/forget_pw.dart'; // Import your ForgotPasswordPage here
-import 'package:ambulify_app/signup.dart'; // Import your SignupPage here
+import 'package:ambulify_app/signup.dart';
 
 class Login_Page extends StatefulWidget {
   const Login_Page({Key? key}) : super(key: key);
@@ -136,7 +136,7 @@ class _Login_PageState extends State<Login_Page> {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => SignupPage()),
+                                    MaterialPageRoute(builder: (context) => SignupPageController()),
                                   );
                                 },
                                 child: Text('Sign Up'),

@@ -1,157 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:ambulify_app/user_signup.dart';
+import 'package:ambulify_app/driver_signup.dart';
+import 'package:lottie/lottie.dart';
+// import 'package:ambulify_app/welcome_two.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: SignupPage(),
+    home: SignupPageController(),
   ));
 }
 
-class SignupPage extends StatefulWidget {
-  @override
-  _SignupPageState createState() => _SignupPageState();
-}
-
-class _SignupPageState extends State<SignupPage> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>(); // Key for the form
-
+class SignupPageController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
-      body: SafeArea(
+      backgroundColor: Colors.white,
+      body: Container(
+        color: Colors.red,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Sign Up',
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(20),
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 20,
-                      offset: Offset(0, 0),
-                    ),
-                  ],
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your name',
-                          prefixIcon: Icon(Icons.person, color: Colors.grey),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Name is required';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your email',
-                          prefixIcon: Icon(Icons.mail_outline, color: Colors.grey),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Email is required';
-                          } else if (!isValidEmail(value)) {
-                            return 'Enter a valid email address';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: phoneController,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your phone number',
-                          prefixIcon: Icon(Icons.phone, color: Colors.grey),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Phone number is required';
-                          } else if (!isValidPhoneNumber(value)) {
-                            return 'Enter a valid phone number';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          hintText: 'Create a password',
-                          prefixIcon: Icon(Icons.lock, color: Colors.grey),
-                        ),
-                        obscureText: true,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Password is required';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // Valid form, you can process the signup here
-                            // Access the values using nameController.text, emailController.text, phoneController.text, passwordController.text
-                          }
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                        ),
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(
+              Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
                             color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          width: 500,
+                          height: 400,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Lottie.asset(
+                                'assets/animations/user2.json',
+                                width: 180,
+                                height: 180,
+                                reverse: true,
+                                repeat: true,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(height: 20),
+                              const Text(
+                                'Are You?',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              ElevatedButton(
+                                onPressed: () {
+                                  // Navigate to the signup page when 'Patient' is pressed
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => UserSignupPage(),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.red,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  minimumSize: const Size(250, 50),
+                                ),
+                                child: const Text('User', style: TextStyle(color: Colors.white)),
+                              ),
+                              SizedBox(height: 12),
+                              ElevatedButton(
+                                onPressed: () {
+                                  // Navigate to the signup page when 'Ambulance Driver' is pressed
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DriverSignupPage(),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.red,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  minimumSize: const Size(250, 50),
+                                ),
+                                child: const Text('Ambulance Driver', style: TextStyle(color: Colors.white)),
+                              ),
+                              SizedBox(height: 25),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  // Function to validate email
-  bool isValidEmail(String email) {
-    final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
-    return emailRegExp.hasMatch(email);
-  }
-
-  // Function to validate phone number
-  bool isValidPhoneNumber(String phone) {
-    final phoneRegExp = RegExp(r'^\d{10}$');
-    return phoneRegExp.hasMatch(phone);
   }
 }

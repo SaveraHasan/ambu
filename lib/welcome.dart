@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:ambulify_app/login.dart';
 import 'package:ambulify_app/welcome_two.dart';
 
 class Welcome extends StatelessWidget {
@@ -42,7 +41,7 @@ class Welcome extends StatelessWidget {
                                 repeat: true,
                                 fit: BoxFit.cover,
                               ),
-                              SizedBox(height: 20), // Spacing between animation and text
+                              SizedBox(height: 20),
                               const Text(
                                 'Are You In Karachi?',
                                 style: TextStyle(
@@ -51,11 +50,10 @@ class Welcome extends StatelessWidget {
                                   color: Colors.red,
                                 ),
                               ),
-                              SizedBox(height: 20), // Spacing between text and buttons
+                              SizedBox(height: 20),
                               ElevatedButton(
                                 onPressed: () {
-                                  // Navigate to the login page when 'Yes' is pressed
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const WelcomeTwo ()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const WelcomeTwo()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.red,
@@ -69,7 +67,8 @@ class Welcome extends StatelessWidget {
                               SizedBox(height: 12),
                               ElevatedButton(
                                 onPressed: () {
-                                  // Add your code for the 'No' button action
+                                  // Show a pop-up dialog when 'No' is pressed
+                                  _showPopupDialog(context);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.red,
@@ -92,6 +91,27 @@ class Welcome extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  // Function to show a pop-up dialog
+  void _showPopupDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Information'),
+          content: Text('Our App is only Karachi based.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
